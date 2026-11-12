@@ -1,6 +1,8 @@
 (() => {
   const BASE = "/moddit-archive";
-  const [subId, segment, routePostId] = location.pathname.replace(/^\/moddit-archive(?=\/|$)/, "").split("/").filter(Boolean).map(decodeURIComponent);
+  const subId = "politics";
+  // The room lives at the site root: /moddit-archive is the feed, /moddit-archive/comments/<id> a thread.
+  const [segment, routePostId] = location.pathname.replace(/^\/moddit-archive(?=\/|$)/, "").replace(/^\/politics(?=\/|$)/, "").split("/").filter(Boolean).map(decodeURIComponent);
   const query = new URLSearchParams(location.search);
   const $ = (sel, root = document) => root.querySelector(sel);
 
@@ -123,8 +125,8 @@
   };
 
   
-  const subHref = `${BASE}/${encodeURIComponent(subId)}`;
-  const postHref = (id) => `${subHref}/comments/${encodeURIComponent(id)}`;
+  const subHref = `${BASE}/`;
+  const postHref = (id) => `${BASE}/comments/${encodeURIComponent(id)}`;
 
   const creditBar = (p) => `
     <div class="credit">
@@ -493,9 +495,8 @@
     setTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
     $("#more-btn").addEventListener("click", () => { const m = $("#more-menu"); m.hidden = !m.hidden; });
     $("#theme-btn").addEventListener("click", () => { setTheme(document.documentElement.dataset.theme === "light" ? "dark" : "light"); $("#more-menu").hidden = true; });
-    if (!subId) { location.replace(`${BASE}/politics`); return; }
     document.title = `m/${subId}`;
-    $("#logo").href = `${BASE}/politics`;
+    $("#logo").href = subHref;
     const meta = await api("").catch(() => ({ id: subId, tags: [] }));
     $("#leftnav").innerHTML = leftNav(meta);
     try {
