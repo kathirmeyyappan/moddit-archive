@@ -1,7 +1,7 @@
 # moddit archive
 
 A static snapshot of the `m/politics` submoddit from the Mohonk Modal Hackathon 2026, taken from
-`https://kathirmey--moddit-moddit.us-east.modal.direct/politics` on 2026-11-12. Served read-only at
+`https://kathirmey--moddit-moddit.us-east.modal.direct/politics` on 2026-11-12. Served read-only (GitHub Pages, from the main branch) at
 https://kathirmeyyappan.github.io/moddit-archive/politics.
 
 - `index.html`, `ui/` — the original moddit UI, with every write path (posts, comments, votes, polls,
