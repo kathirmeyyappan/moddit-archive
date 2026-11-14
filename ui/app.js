@@ -50,7 +50,7 @@
   const UNITS = [["year", 31536000], ["month", 2592000], ["day", 86400], ["hour", 3600], ["minute", 60]];
   const timeago = (ts, style = "short") => {
     if (!ts) return "";
-    return new Date(ts * 1000).toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" });
+    return new Date(ts * 1000).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
     const s = Date.now() / 1000 - ts;
     for (const [unit, secs] of UNITS) if (s >= secs) return rtf[style].format(-Math.round(s / secs), unit);
     return "just now";
@@ -492,6 +492,11 @@
   }
 
   async function main() {
+    // The topbar sticks under the banner, so measure the banner instead of guessing its wrapped height.
+    const banner = $(".archive-banner");
+    const setBannerHeight = () => document.documentElement.style.setProperty("--banner-height", `${banner.offsetHeight}px`);
+    setBannerHeight();
+    new ResizeObserver(setBannerHeight).observe(banner);
     setTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
     $("#more-btn").addEventListener("click", () => { const m = $("#more-menu"); m.hidden = !m.hidden; });
     $("#theme-btn").addEventListener("click", () => { setTheme(document.documentElement.dataset.theme === "light" ? "dark" : "light"); $("#more-menu").hidden = true; });

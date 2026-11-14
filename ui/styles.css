@@ -344,9 +344,6 @@ html:has(body.home) { scrollbar-gutter: stable; }
 }
 @media (max-width: 720px) {
   .popover { max-width: calc(100% - 32px); }
-  .topbar { height: 108px; align-items: flex-start; }
-  .logo, .topbar-actions { margin-top: 8px; }
-  .search { display: flex; top: 58px; left: 16px; transform: none; width: calc(100% - 32px); }
   .community-head { flex-wrap: wrap; height: auto; padding-bottom: 8px; row-gap: 8px; }
   .community-name { min-width: 0; font-size: 24px; line-height: 32px; overflow-wrap: anywhere; }
   .community-actions { width: 100%; justify-content: flex-end; }
@@ -399,3 +396,12 @@ button:disabled { opacity: .5; cursor: default; }
 body { user-select: none; -webkit-user-select: none; }
 .votebtn, .cvotebtn { pointer-events: none; }
 .vote, .cvote { cursor: default; }
+.archive-banner { position: sticky; top: 0; z-index: 21; }
+.topbar { top: var(--banner-height, 0px); }
+.credit { flex-wrap: wrap; height: auto; min-height: 24px; row-gap: 2px; }
+.credit time, .comment-meta time { white-space: nowrap; }
+.author-karma { white-space: nowrap; }
+@media (max-width: 720px) {
+  .community-actions { width: auto; }
+  .community-actions .pill-outline span { display: inline; }
+}
